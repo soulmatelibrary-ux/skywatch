@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* .gitignore 에 logs 규칙이 없는 환경(공개 저장소 clone 등)에서도 같은 화면이 나오도록 명시적으로 뺀다 */
+@source not "./components/logs";
 
 /* components/logs 는 .gitignore 의 logs 폴더 규칙(별표 두 개 + 슬래시 형태)에 걸려 Tailwind 가 읽지 않는다. (주석 안에 별표+슬래시를 쓰면 주석이 거기서 끝나 아래 규칙이 깨진다)
    그 폴더의 새 화면(v2) 클래스만 여기 등록한다 (폴더 전체를 읽게 하면 기존 화면 모양이 바뀔 수 있어서).

@@ -22,7 +22,7 @@
 
 - Windows 10/11 (macOS·Linux 도 수동 실행 가능), **Python 3.13**, **Node.js 22**
 - **PostgreSQL 17** + **pgvector** 확장 (`pg_trgm`, `pgcrypto` 도 사용 — 스키마가 자동 생성)
-- 임베딩 모델 `backend/models/kure-v1` (약 2.6GB, 저장소에 없음 — 담당자에게 따로 받는다).
+- 임베딩 모델 `backend/models/kure-v1` (약 2.3GB, 저장소에 없음). 받기: `cd backend && ..\.venv\Scripts\python scripts\download_model.py` (Hugging Face `nlpai-lab/KURE-v1`).
   모델이 없어도 앱은 뜨고 키워드 검색은 된다. 벡터 검색·재색인만 안 된다.
 
 ## 처음 설치
@@ -103,5 +103,6 @@ cd frontend && npm run dev          # http://localhost:5173 (/api 는 8000 으�
 - 스키마 변경은 **Alembic 마이그레이션 추가**로만 한다. 기존 표를 지우거나 바꾸지 않는다.
 - API 호출은 컴포넌트에서 직접 하지 않고 `services/api/*` → `hooks/*` 를 거친다.
 - 본문 HTML 은 `DOMPurify` 로 정화해서 그린다.
-- 커밋 전 `cd frontend && npx tsc -b --noEmit` 통과.
+- 커밋 전 `cd frontend && npx tsc -b --noEmit` 통과, 샘플 DB 에서 `cd backend && ..\.venv\Scripts\python scripts\smoke_test.py` 통과.
+- Claude Code 로 작업한다면 `CLAUDE.md` 에 설치·검증·함정이 정리되어 있다.
 - 비밀번호·SECRET_KEY·실제 운영 자료(이름, 일지 본문, 첨부파일)는 커밋하지 않는다. `backend/.env`, `backend/uploads`, `backend/models` 는 `.gitignore` 에 들어 있다.
