@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkyWatch 사용 안내</title>
+<script>
+  // SkyWatch 화면과 같은 밝기로 연다 (같은 주소에서 열리므로 설정을 그대로 읽는다)
+  try { if (localStorage.getItem('skywatch-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
+</script>
+<style>
+  :root {
+    --bg: #F3F6F9; --panel: #FFFFFF; --sub: #EEF2F6; --line: #DCE1E8; --text: #1C2B3F; --muted: #5B6B80;
+    --accent: #2160D6; --accent-bg: #EAF1FD; --warn-bg: #FFF6E5; --warn: #8A5A00; --nav: #1C2B3F; --nav-text: #C9D3E0;
+    --key-bg: #F6F8FB;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E1521; --panel: #151E2B; --sub: #1A2433; --line: #263243; --text: #E3E9F1; --muted: #93A1B5;
+    --accent: #5B9BF3; --accent-bg: #1B2A44; --warn-bg: #2E2414; --warn: #F0C36B; --nav: #0B111B; --nav-text: #AEB9C8;
+    --key-bg: #1E2938;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.7 "맑은 고딕", "Malgun Gothic", system-ui, sans-serif; word-break: keep-all; }
+  a { color: var(--accent); }
+  .wrap { display: grid; grid-template-columns: 250px minmax(0, 1fr); min-height: 100vh; }
+  nav.toc { position: sticky; top: 0; height: 100vh; overflow: auto; background: var(--nav); color: var(--nav-text); padding: 22px 14px 40px; }
+  nav.toc .brand { color: #fff; font-weight: 700; font-size: 17px; padding: 0 8px 4px; }
+  nav.toc .brand small { display: block; color: var(--nav-text); font-weight: 400; font-size: 12px; }
+  nav.toc ol { list-style: none; margin: 18px 0 0; padding: 0; }
+  nav.toc li > a { display: block; color: var(--nav-text); text-decoration: none; padding: 6px 10px; border-radius: 6px; font-size: 14px; }
+  nav.toc li > a:hover { background: rgba(255,255,255,.06); color: #fff; }
+  nav.toc li > a.on { background: rgba(91,155,243,.18); color: #fff; font-weight: 700; }
+  nav.toc ol ol { margin: 2px 0 8px 10px; border-left: 1px solid rgba(255,255,255,.1); }
+  nav.toc ol ol a { font-size: 13px; padding: 3px 10px; }
+  main { padding: 28px 40px 80px; max-width: 1180px; }
+  section.menu { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 26px 32px 30px; margin-bottom: 28px; }
+  h1 { font-size: 26px; margin: 0 0 6px; letter-spacing: -0.5px; }
+  h2 { font-size: 22px; margin: 0 0 4px; letter-spacing: -0.4px; display: flex; align-items: baseline; gap: 10px; }
+  h2 .path { font-size: 13px; font-weight: 400; color: var(--muted); font-family: Consolas, monospace; }
+  h3 { font-size: 17px; margin: 30px 0 8px; padding-top: 14px; border-top: 1px solid var(--line); }
+  h4 { font-size: 15px; margin: 18px 0 6px; }
+  p.lead { color: var(--muted); margin: 0 0 14px; }
+  ol.steps { counter-reset: s; list-style: none; padding: 0; margin: 10px 0 14px; }
+  ol.steps > li { counter-increment: s; position: relative; padding: 6px 0 6px 40px; }
+  ol.steps > li::before { content: counter(s); position: absolute; left: 0; top: 6px; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 13px; font-weight: 700; display: grid; place-items: center; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 14px; }
+  th, td { border-bottom: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--sub); font-weight: 600; color: var(--muted); font-size: 13px; white-space: nowrap; }
+  td:first-child { white-space: nowrap; }
+  .btn { display: inline-block; border: 1px solid var(--line); background: var(--key-bg); border-radius: 5px; padding: 0 7px; font-size: 13px; line-height: 22px; white-space: nowrap; font-weight: 600; }
+  .note { background: var(--accent-bg); border-radius: 8px; padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+  .warn { background: var(--warn-bg); color: var(--warn); border-radius: 8px; padding: 10px 14px; margin: 12px 0; font-size: 14px; }
+  .who { display: inline-block; font-size: 12px; border-radius: 4px; padding: 0 6px; background: var(--warn-bg); color: var(--warn); font-weight: 700; margin-left: 4px; }
+  figure { margin: 12px 0 18px; }
+  figure img { display: block; max-width: 100%; border: 1px solid var(--line); border-radius: 8px; cursor: zoom-in; }
+  figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .quick { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 16px 0 0; }
+  .quick a { display: block; text-decoration: none; color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; background: var(--panel); }
+  .quick a:hover { border-color: var(--accent); }
+  .quick b { display: block; font-size: 15px; }
+  .quick span { font-size: 13px; color: var(--muted); }
+  .zoom { position: fixed; inset: 0; background: rgba(5,10,18,.85); display: none; place-items: center; z-index: 10; cursor: zoom-out; padding: 20px; }
+  .zoom.show { display: grid; }
+  .zoom img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+  kbd { font: 12px Consolas, monospace; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: var(--key-bg); }
+  @media (max-width: 860px) { .wrap { grid-template-columns: 1fr; } nav.toc { position: static; height: auto; } main { padding: 16px; } section.menu { padding: 18px; } }
+  @media print { nav.toc { display: none; } .wrap { display: block; } section.menu { break-inside: auto; border: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" aria-label="목차">
+  <div class="brand">SkyWatch 사용 안내<small>관제 근무 업무 시스템</small></div>
+  <ol>
+    <li><a href="#start">처음 볼 것</a></li>
+    <li><a href="#shift">근무일지</a>
+      <ol>
+        <li><a href="#shift-write">일지 쓰기</a></li>
+        <li><a href="#shift-read">일지 보기</a></li>
+        <li><a href="#shift-explore">카드 검색·카드 묶기</a></li>
+        <li><a href="#shift-board">이어지는 업무</a></li>
+      </ol></li>
+    <li><a href="#logs">업무일지</a>
+      <ol>
+        <li><a href="#logs-list">목록·검색</a></li>
+        <li><a href="#logs-create">새 일지 작성 창</a></li>
+        <li><a href="#logs-view">일지 보기 창</a></li>
+      </ol></li>
+    <li><a href="#inquiry">문의사항</a>
+      <ol>
+        <li><a href="#inquiry-list">목록·검색</a></li>
+        <li><a href="#inquiry-new">새 문의 등록</a></li>
+        <li><a href="#inquiry-view">상세·새 창</a></li>
+      </ol></li>
+    <li><a href="#techdocs">관제시스템 문서</a>
+      <ol>
+        <li><a href="#techdocs-find">찾기</a></li>
+        <li><a href="#techdocs-write">새 문서 쓰기</a></li>
+      </ol></li>
+    <li><a href="#pr">PR관리</a>
+      <ol>
+        <li><a href="#pr-issues">개별 PR 목록</a></li>
+        <li><a href="#pr-batches">버전별 검증·보고</a></li>
+        <li><a href="#pr-verify">검증 입력·보고서</a></li>
+      </ol></li>
+    <li><a href="#roster">근무편성</a></li>
+    <li><a href="#commute">통근비 계산</a></li>
+  </ol>
+</nav>
+
+<main>
+<!-- ───────────────────────── 처음 볼 것 ───────────────────────── -->
+<section class="menu" id="start">
+  <h1>SkyWatch 사용 안내</h1>
+  <p class="lead">메뉴마다 화면 구성, 버튼, 작성 순서를 정리했습니다. 각 화면 상단의 <span class="btn">? 도움말</span>을 누르면 그 메뉴 설명이 바로 열립니다.</p>
+  <div class="quick">
+    <a href="#shift"><b>근무일지</b><span>근무마다 카드로 쓰고, 다음 근무로 넘깁니다</span></a>
+    <a href="#logs"><b>업무일지</b><span>지난 일지 조회, 기존 방식 작성·수정</span></a>
+    <a href="#inquiry"><b>문의사항</b><span>관제사 문의 접수·처리 기록</span></a>
+    <a href="#techdocs"><b>관제시스템 문서</b><span>절차서·자료 보관과 검색</span></a>
+    <a href="#pr"><b>PR관리</b><span>PR 이력, 버전별 검증과 시험 확인서</span></a>
+  </div>
+  <h3>화면 공통</h3>
+  <table>
+    <tr><th>위치</th><th>버튼·표시</th><th>하는 일</th></tr>
+    <tr><td>상단 바</td><td><span class="btn">? 도움말</span></td><td>지금 메뉴의 사용 안내를 새 창으로 엽니다.</td></tr>
+    <tr><td></td><td><span class="btn">새 화면으로 보기</span> / <span class="btn">기존 화면으로</span></td><td>화면 모양만 바꿉니다. 기능과 데이터는 같고, PC마다 기억합니다.</td></tr>
+    <tr><td></td><td>종 모양(알림)</td><td>멘션·댓글·수정 알림을 봅니다.</td></tr>
+    <tr><td></td><td>해·달 모양</td><td>밝은 화면 / 어두운 화면 전환 (새 화면)</td></tr>
+    <tr><td></td><td>자물쇠 · <span class="btn">로그아웃</span></td><td>비밀번호 변경, 로그아웃 (새 화면)</td></tr>
+    <tr><td>왼쪽 메뉴</td><td>아이콘 줄</td><td>메뉴 이동. 마우스를 올리면 전체 이름이 보입니다. 관제시스템 문서와 3D 공역관리는 새 창으로 열립니다.</td></tr>
+  </table>
+  <div class="note">일지·문의·PR 보기 창은 새 화면에서 화면 절반 크기로 왼쪽·오른쪽 번갈아 열립니다. 두 개를 나란히 놓고 비교할 수 있습니다. 창 제목에 날짜·번호가 나오므로 작업 표시줄에서 구분됩니다.</div>
+  <p style="font-size:13px;color:var(--muted)">화면 사진은 새 화면(밝은 화면) 기준입니다. 기존 화면은 모양만 다르고 버튼 이름은 같습니다.</p>
+</section>
+
+<!-- ───────────────────────── 근무일지 ───────────────────────── -->
+<section class="menu" id="shift">
+  <h2>근무일지 <span class="path">/shift</span></h2>
+  <p class="lead">근무(날짜 + 주간·야간·주야)마다 한 건씩 쓰는 일지입니다. 내용은 <b>카드</b> 단위로 쓰고, 끝나지 않은 일은 <b>이어지는 일</b>로 다음 근무에 넘깁니다.</p>
+  <table>
+    <tr><th>탭</th><th>용도</th></tr>
+    <tr><td><span class="btn">일지 쓰기</span></td><td>이번 근무의 카드·전달 메모 작성 (메뉴를 누르면 처음 열리는 화면)</td></tr>
+    <tr><td><span class="btn">일지 보기</span></td><td>왼쪽 근무 목록에서 근무를 고르면 오른쪽에 그 근무의 카드를 분류별로 보여 줍니다</td></tr>
+    <tr><td><span class="btn">카드 검색</span></td><td>전체 기간의 카드를 조건으로 찾고, 여러 카드를 하나의 묶음으로 연결</td></tr>
+    <tr><td><span class="btn">이어지는 업무</span></td><td>진행 중인 이어지는 일과 장기 과제 현황</td></tr>
+    <tr><td><span class="btn">과제 묶기</span><span class="who">관리자</span></td><td>기존 카드에서 찾은 과제 후보를 장기 과제·이어지는 일로 정리</td></tr>
+    <tr><td><span class="btn">과거 업무일지 보기 ›</span></td><td>업무일지 목록으로 이동</td></tr>
+  </table>
+
+  <h3 id="shift-write">일지 쓰기</h3>
+  <figure><img src="img/shift-write.png" alt="근무일지 일지 쓰기 화면" loading="lazy"><figcaption>일지 쓰기 — 왼쪽 할 일, 가운데 작성, 오른쪽 받은 전달</figcaption></figure>
+  <h4>맨 위: 작성 대상 근무</h4>
+  <table>
+    <tr><th>버튼·칸</th><th>하는 일</th></tr>
+    <tr><td><span class="btn">◀</span> 날짜 <span class="btn">▶</span></td><td>이전·다음 근무로 이동. 날짜는 오늘까지만 고를 수 있습니다.</td></tr>
+    <tr><td>주간 · 야간 · 주야</td><td>근무 구분. 주야는 같은 날 주간·야간 일지와 함께 쓸 수 없습니다.</td></tr>
+    <tr><td>오늘 내 근무</td><td>근무표 기준 바로가기(○조). 두 근무 이상이면 <span class="btn">하나로 쓰기</span>(주야)</td></tr>
+    <tr><td>최근 7일 근무 ▾</td><td>내가 일한 최근 7일(어제·그제 포함) 근무를 카드 수와 함께 골라 바로 이동합니다.</td></tr>
+    <tr><td>근무자 칩 ×, <span class="btn">＋ 근무자 추가</span></td><td>이 근무의 근무자를 빼거나 더합니다(2명 이상일 때만 뺄 수 있음).</td></tr>
+  </table>
+  <div class="warn">지난 근무를 고르면 <b>지연 작성</b>, 그 근무 근무자가 아닌 사람이 쓰면 <b>대리 작성</b>으로 표시됩니다. 같은 근무에 충돌이 있으면 ⚠ 경고와 함께 입력이 막힙니다.</div>
+
+  <h4>가운데: 새 카드 작성</h4>
+  <ol class="steps">
+    <li><b>과제 선택</b> — <span class="btn">일회성 카드 (과제 연결 안 함)</span>, 🔗 이어받은 일, 📌 장기 과제 중 고릅니다. 왼쪽 목록의 <span class="btn">＋ 이어서 쓰기</span>를 눌러도 자동으로 골라집니다.</li>
+    <li><b>제목</b>을 씁니다(필수).</li>
+    <li><b>본문</b> — 도구 줄의 <span class="btn">항목 넣기</span>(조치·원인·결과·다음 할 일), <span class="btn">B</span>, <span class="btn">• 목록</span>, <span class="btn">표 넣기</span>, <span class="btn">이미지 넣기</span>(10MB 이하)를 씁니다. 한글·엑셀 표와 캡처 이미지는 붙여넣기(<kbd>Ctrl</kbd>+<kbd>V</kbd>)로 넣을 수 있습니다.</li>
+    <li><b>연결</b> — 본문에 <kbd>#검색어</kbd>를 치면 다른 카드 링크, <kbd>#TD:번호</kbd>는 관제시스템 문서 링크가 됩니다.</li>
+    <li><span class="btn">📎 파일 첨부</span> — 여러 개, 끌어다 놓기 가능, 파일당 20MB.</li>
+    <li><b>분류</b>를 고릅니다(기본 '기타').</li>
+    <li>다음 근무가 이어서 해야 하면 <span class="btn">🔗 다음 근무로 이어짐</span>을 체크합니다. 새 이어지는 일이 만들어집니다.</li>
+    <li><span class="btn">카드 저장</span>. 이미지를 올리는 중에는 누를 수 없습니다. 당일 종료 카드는 <b>완료</b> 상태이고, 🔗 다음 근무로 이어짐 카드는 <b>진행중</b>입니다.</li>
+  </ol>
+  <div class="note">분류 이름에 '문의'가 들어간 카드(예: 문의사항/요청사항)를 <b>완료</b>로 저장하면 <b>문의사항</b> 메뉴에도 한 건이 자동으로 등록되고 "문의사항 메뉴에도 등록했습니다 (H번호)" 알림이 뜹니다. 이어지는 일(진행중) 카드는 그 일을 종료할 때 등록됩니다. 자세한 기본값은 <a href="#inquiry-auto">문의사항</a> 참고.</div>
+  <h4>가운데: 📨 전달·메모</h4>
+  <p>카드로 쓸 정도가 아닌 한 줄 전달입니다. 종류(전달사항·행정·기타) → 내용(255자) → <b>받는 사람</b>(다음 근무 / 근무자 전원 / 특정인) → <b>유지</b>(확인할 때까지 / 다음 근무에만 / 7일간) → <span class="btn">메모 저장</span> 또는 <kbd>Enter</kbd>.</p>
+  <h4>가운데 아래: 이 근무의 카드</h4>
+  <p>저장한 카드 목록입니다. <span class="btn">모두 펼치기</span> / <span class="btn">모두 접기</span>, <span class="btn">읽기 화면 ›</span>(일지 보기로 이동).</p>
+  <h4 id="shift-write-edit">카드 고치기·지우기</h4>
+  <p>오늘 근무뿐 아니라 어제·그제 등 <b>최근 7일</b> 근무의 카드도 같은 방법으로 고칩니다(위의 <b>최근 7일 근무 ▾</b> 또는 ◀ ▶). 7일이 넘은 근무는 “오래된 근무입니다” 안내만 나오고 고칠 수 있습니다.</p>
+  <ol class="steps">
+    <li>카드 줄 오른쪽의 <span class="btn">✎ 수정</span>(펼친 카드 아래의 <span class="btn">수정</span>)을 누르면 그 자리에서 <b>수정 중</b> 상자가 열립니다. 한 번에 한 장만 고칠 수 있습니다.</li>
+    <li>분류·제목·본문(표·이미지·<kbd>#카드</kbd> 링크 포함)을 고치고 <span class="btn">수정 저장</span>(<kbd>Ctrl</kbd>+<kbd>Enter</kbd>)을 누릅니다. 저장하면 카드 줄에 <b>수정 이름 시각</b>이 표시됩니다. 첨부 파일은 여기서 바꿀 수 없습니다.</li>
+    <li><b>다른 근무자가 쓴 카드</b>는 상자에 작성자가 표시되고, 저장 전에 한 번 확인합니다. 고치면 이전 내용은 남지 않고, <b>이 근무 일지를 만든 사람</b>(카드를 쓴 사람과 다를 수 있습니다)에게 수정 알림이 갑니다. 그 사람이 직접 고칠 때는 알림이 없습니다. 그 사이 다른 사람이 같은 카드의 제목·본문·분류를 바꿨다면 덮어쓸지 물어보고, 상태 변경처럼 내용이 그대로인 경우는 묻지 않습니다.</li>
+    <li><b>이어짐 바꾸기</b> — <span class="btn">당일 종료</span> ↔ <span class="btn">🔗 다음 근무로 이어짐</span>. 이어짐으로 바꾸면 이 카드로 새 이어지는 일이 만들어져 카드가 진행중이 되고, 당일 종료로 바꾸면 이 카드만 일에서 빠져 완료가 됩니다(카드 하나뿐인 일이면 그 일이 종료됩니다). 장기 과제 카드는 과제 화면에서 바꿉니다.</li>
+    <li><span class="btn">카드 삭제</span>(수정 상자 왼쪽 아래)는 확인 문구를 본 뒤에만 지워지고, 삭제한 카드는 이 화면에서 되살릴 수 없습니다(관리자가 DB 에서 삭제 표시를 되돌려야 하며, 이어지는 일에서 빠진 연결은 돌아오지 않습니다). 이어지는 일의 카드를 지우면 그 일에서 빠지고, 마지막 카드였다면 그 일은 종료됩니다. 삭제 알림은 가지 않습니다.</li>
+    <li><span class="btn">취소</span>·<kbd>Esc</kbd> — 고친 내용이 있으면 <span class="btn">내용 버리기</span>를 한 번 더 눌러야 닫힙니다. 수정 중에 다른 근무·메뉴·링크로 이동하려 하면 저장하지 않고 이동할지 묻습니다(<span class="btn">계속 수정</span> / <span class="btn">버리고 이동</span>). 새로고침·창 닫기도 경고가 나옵니다. 다만 <b>브라우저의 뒤로가기 버튼은 막을 수 없어</b> 저장하지 않은 내용이 사라질 수 있으니, 수정 중에는 누르지 마세요.</li>
+  </ol>
+  <h4>왼쪽·오른쪽 패널</h4>
+  <table>
+    <tr><th>패널</th><th>버튼</th><th>하는 일</th></tr>
+    <tr><td>작성 안 된 근무</td><td><span class="btn">작성</span></td><td>최근 7일 중 일지가 없는 근무로 이동</td></tr>
+    <tr><td>🔗 이어받은 일</td><td><span class="btn">＋ 이어서 쓰기</span> <span class="btn">✓ 종료</span> <span class="btn">종료된 일 찾기</span></td><td>이어서 쓸 카드 작성 / 일 끝내기 / 끝난 일을 다시 열어 이어 쓰기. 제목을 누르면 과제 상세가 열립니다.</td></tr>
+    <tr><td>📌 장기 과제</td><td><span class="btn">＋ 진행 기록</span></td><td>장기 과제에 이번 근무 기록 추가</td></tr>
+    <tr><td>📨 받은 전달사항</td><td><span class="btn">확인</span></td><td>전달 메모를 읽었다고 표시</td></tr>
+    <tr><td>이전 근무 인계</td><td><span class="btn">읽기 화면에서 보기</span></td><td>이전 근무가 남긴 다음 할 일 확인</td></tr>
+    <tr><td>정기 업무</td><td><span class="btn">작성</span></td><td>정기 업무 제목·본문을 새 카드 칸에 미리 채움</td></tr>
+  </table>
+  <h4>과제 상세 (오른쪽에서 열리는 서랍)</h4>
+  <p>이어지는 일·장기 과제의 근무별 기록이 모입니다. <kbd>Esc</kbd>나 바깥을 누르면 닫힙니다.</p>
+  <table>
+    <tr><th>버튼</th><th>하는 일</th></tr>
+    <tr><td><span class="btn">＋ 이 근무에 기록</span></td><td>지금 근무에서 이어 쓰기</td></tr>
+    <tr><td><span class="btn">↻ 다시 열고 이어서 쓰기</span></td><td>종료된 일을 다시 열어 이어 쓰기</td></tr>
+    <tr><td><span class="btn">✓ 종료</span> <span class="btn">보류</span> <span class="btn">다시 진행</span></td><td>상태 변경. 이어지는 일은 연결된 카드가 모두 같은 상태로 움직입니다: 진행중·보류로 바꾸면 카드도 진행중·보류, <b>✓ 종료</b>하면 카드가 모두 완료.</td></tr>
+    <tr><td><span class="btn">다음 단계로</span> <span class="btn">＋ 다음 해 과제로 복사</span></td><td>장기 과제 단계 넘기기, 매년 반복 과제 복사</td></tr>
+    <tr><td><span class="btn">원래 일지 열기</span> <span class="btn">묶음에서 빼기</span></td><td>기록의 원래 일지 보기 / 묶음에서만 빼기(카드는 지워지지 않고, 진행중·보류였던 카드는 완료로 돌아감)</td></tr>
+  </table>
+  <div class="note">이어서 쓰면 묶음 안 이전 카드도 모두 진행중으로 돌아오고(종료된 일을 다시 열 때 포함), 누군가 종료하거나 업무일지 화면에서 묶음 안 카드 하나를 <b>완료</b>로 바꾸면 묶음 전체가 종료됩니다. 카드가 2장 이상인 묶음은 완료 전에 확인창이 나옵니다.</div>
+  <div class="note">카드는 일지 쓰기의 <b>이 근무의 카드</b>에서 고치고 지웁니다. 일지 보기 화면에서는 <span class="btn">기존 화면으로 열기</span>(업무일지 창)에서 고칩니다. 어느 쪽에서 고쳐도 다른 쪽에 바로 반영됩니다.</div>
+
+  <h3 id="shift-read">일지 보기</h3>
+  <figure><img src="img/shift-read.png" alt="근무일지 일지 보기 화면" loading="lazy"><figcaption>일지 보기 — 왼쪽 근무 목록, 오른쪽 선택한 근무의 카드</figcaption></figure>
+  <table>
+    <tr><th>위치</th><th>버튼·칸</th><th>하는 일</th></tr>
+    <tr><td>처음 열 때</td><td>(자동)</td><td>지금 근무에 아직 일지가 없으면 <b>직전에 쓴 근무</b>를 대신 보여 주고, 위에 안내 띠가 뜹니다. 안내 띠의 <span class="btn">지금 근무 보기</span>로 지금 근무로 갑니다.</td></tr>
+    <tr><td>왼쪽 위</td><td>날짜 칸</td><td>고른 날짜의 근무로 바로 이동(오래된 날도 가능). 그날 보던 종류(주간·야간)가 없으면 일지가 있는 근무가 열리고(주야 근무 날은 주야), 지금 근무의 날짜보다 뒤 날짜는 고를 수 없습니다 — 오전 9시 전에는 어제 야간이 지금 근무라서 어제까지만 고를 수 있습니다.</td></tr>
+    <tr><td></td><td>근무자·조·날짜 칸</td><td>지금 목록을 이름·조·날짜로 거르기. <b>A조</b>를 치면 A·B조 주야 근무도 나오고, 대소문자는 구분하지 않으며, 띄어쓰기로 여러 단어(예: <b>A조 야간</b>)를 모두 만족하는 근무만 남습니다.</td></tr>
+    <tr><td></td><td>내 근무만</td><td>내가 근무한 것만 표시</td></tr>
+    <tr><td>왼쪽 목록</td><td>근무 한 줄</td><td>누르면 오른쪽에 표시. 미작성·지연·대리 표시, 카드 수·전달 수</td></tr>
+    <tr><td>왼쪽 아래</td><td><span class="btn">이전 14일 더 보기</span></td><td>더 지난 근무 불러오기(최대 120일)</td></tr>
+    <tr><td>오른쪽 위</td><td><span class="btn">‹ 이전 근무</span> <span class="btn">다음 근무 ›</span></td><td>근무를 시간 순서대로 하나씩 넘깁니다(왼쪽 목록의 선택 표시도 따라갑니다). 그날이 주야 근무면 주야 근무로 넘어가고, 넘겨도 브라우저 뒤로 가기 기록은 늘지 않습니다. 아직 시작하지 않은 근무로는 넘길 수 없습니다.</td></tr>
+    <tr><td></td><td><span class="btn">기존 화면으로 열기</span></td><td>업무일지 보기 창 — 카드 수정·삭제·댓글은 여기서</td></tr>
+    <tr><td></td><td><span class="btn">✍️ 이 근무에 카드 추가</span></td><td>이 근무를 대상으로 일지 쓰기 화면 열기</td></tr>
+    <tr><td>일지가 없을 때</td><td><span class="btn">지금 작성하기</span> / <span class="btn">11-03 (월) 주간 일지 쓰기</span></td><td>지금 근무는 파란 버튼, 지난 근무는 날짜가 적힌 흰 버튼으로 그 근무의 일지 쓰기 화면을 엽니다. 오늘 이후 날짜의 근무는 아직 일지를 만들 수 없어 쓰기 화면을 열어도 저장되지 않습니다.</td></tr>
+    <tr><td>목차 줄</td><td>이 근무에서 찾기</td><td>제목·본문·분류·작성자에 검색어가 있는 카드만 표시. 다른 근무를 골라도 검색어가 유지됩니다.</td></tr>
+    <tr><td></td><td>분류 단추, <span class="btn">모두 접기</span> <span class="btn">모두 펼치기</span></td><td>분류 위치로 이동, 카드 접기·펼치기</td></tr>
+  </table>
+
+  <h3 id="shift-explore">카드 검색 · 카드 묶기</h3>
+  <figure><img src="img/shift-explore.png" alt="카드 검색 화면" loading="lazy"><figcaption>카드 검색 — 왼쪽 조건, 오른쪽 결과</figcaption></figure>
+  <table>
+    <tr><th>버튼·칸</th><th>하는 일</th></tr>
+    <tr><td>🔍 제목·내용 검색</td><td>띄어쓰기로 여러 단어(모두 들어간 카드)</td></tr>
+    <tr><td>묶기: 분류 / 과제 / 근무</td><td>결과를 무엇 기준으로 모아 볼지</td></tr>
+    <tr><td><span class="btn">카드</span> / <span class="btn">한 줄</span></td><td>보기 방식</td></tr>
+    <tr><td>기간·분류·구분·근무자</td><td>왼쪽 조건. 빠른 보기: 내가 근무한 카드 / 장애 처리 / 지연 작성</td></tr>
+    <tr><td><span class="btn">초기화</span> <span class="btn">＋ 지금 조건 저장</span></td><td>조건 지우기 / 자주 쓰는 조건 이름 붙여 저장</td></tr>
+    <tr><td>카드의 <span class="btn">일지 보기 ›</span></td><td>그 카드가 쓰인 근무의 일지 보기가 열리고, 해당 카드가 펼쳐져 잠시 강조됩니다. Ctrl+클릭하면 새 탭으로 열립니다. 일지 보기에서 뒤로 가면 검색 조건·묶기·보기·쪽이 그대로 남아 있습니다(<span class="btn">초기화</span>로 지움).</td></tr>
+  </table>
+  <h4>여러 카드를 하나로 묶기</h4>
+  <ol class="steps">
+    <li><span class="btn">🔗 카드 묶기</span>를 누르면 완료된 카드에 체크 상자가 나옵니다(쪽을 넘겨도 선택 유지).</li>
+    <li>묶을 카드를 고르고 <span class="btn">선택한 카드 묶기</span>.</li>
+    <li>창에서 <b>새 묶음 만들기</b>(이름 입력, 2장 이상) 또는 <b>기존 묶음에 추가</b>(이름으로 찾아 고르기) → <span class="btn">묶기</span>. 진행중·보류인 일에 붙인 카드는 그 일 상태를 따릅니다.</li>
+    <li>끝나면 <span class="btn">묶기 끝내기</span>.</li>
+  </ol>
+  <div class="warn">다른 묶음에 있던 카드는 새 묶음으로 옮겨집니다. 장기 과제에 기록된 카드는 묶을 수 없습니다. 되돌리려면 과제 상세의 <span class="btn">묶음에서 빼기</span>를 씁니다.</div>
+
+  <h3 id="shift-board">이어지는 업무</h3>
+  <figure><img src="img/shift-board.png" alt="이어지는 업무 화면" loading="lazy"><figcaption>이어지는 업무 — 장기 과제 일정과 진행중·보류·최근 완료</figcaption></figure>
+  <p>위쪽은 📌 장기 과제의 단계 일정, 아래쪽은 🔗 이어지는 일을 <b>진행중 / 보류 / 최근 7일 완료</b> 칸으로 보여 줍니다. 항목을 누르면 과제 상세가 열립니다. <span class="btn">전체 분류</span>로 거릅니다.</p>
+  <h4>장기 과제 만들기</h4>
+  <ol class="steps">
+    <li><span class="btn">＋ 장기 과제 만들기</span></li>
+    <li>제목(예: 2027 정보시스템 취약점 점검), 분류, 매년 반복 월을 정합니다.</li>
+    <li>단계마다 이름·시작 월·끝 월. <span class="btn">＋ 단계 추가</span>, ×로 삭제(1개는 남아야 함).</li>
+    <li><span class="btn">만들기</span></li>
+  </ol>
+</section>
+
+<!-- ───────────────────────── 업무일지 ───────────────────────── -->
+<section class="menu" id="logs">
+  <h2>업무일지 <span class="path">/logs</span></h2>
+  <p class="lead">근무일지 이전부터 써 온 일지 목록입니다. 근무일지 카드도 여기에 함께 쌓이며, 일지 한 건을 한 창에서 고치고 댓글을 남깁니다.</p>
+
+  <h3 id="logs-list">목록 · 검색</h3>
+  <figure><img src="img/logs-list.png" alt="업무일지 목록" loading="lazy"><figcaption>업무일지 목록 — 줄을 누르면 보기 창이 열립니다</figcaption></figure>
+  <table>
+    <tr><th>버튼·칸</th><th>하는 일</th></tr>
+    <tr><td>일지·카드·댓글 검색</td><td>제목·본문·댓글에서 찾기</td></tr>
+    <tr><td>근무조 / 카드 분류</td><td>전체조·A~D조·일근, 분류로 거르기</td></tr>
+    <tr><td>공지 숨기기, <span class="btn">📎 첨부파일 검색</span></td><td>공지 빼고 보기 / 첨부파일 이름으로 찾기</td></tr>
+    <tr><td>표 머리</td><td>일자 및 근무 · 작성자 · 요약 · 현황(카드·댓글·첨부 수) · 상태 · 최종 수정 · 진행중</td></tr>
+    <tr><td>« ‹ › », 쪽당 건수</td><td>쪽 이동, 50/100/150/200건 또는 직접 입력</td></tr>
+    <tr><td>상단 <span class="btn">카드 검색</span> <span class="btn">이어지는 업무</span> <span class="btn">근무일지 작성</span></td><td>근무일지 화면으로 이동</td></tr>
+  </table>
+  <p>읽지 않은 일지는 파란 점으로 표시됩니다. 줄 왼쪽 색 띠는 근무 구분(주간·야간·주야)입니다.</p>
+
+  <h3 id="logs-create">새 일지 작성 창</h3>
+  <figure><img src="img/logs-create.png" alt="새 일지 작성 창" loading="lazy"><figcaption>상단 <b>+ 새 일지 작성</b>으로 여는 작성 창</figcaption></figure>
+  <ol class="steps">
+    <li>업무일지 화면 상단 <span class="btn">+ 새 일지 작성</span> → 새 창이 열립니다.</li>
+    <li>날짜, 근무유형(주간·야간·주야·공지)을 고릅니다. 같은 날짜·근무유형 일지가 이미 있으면 안내가 나옵니다.</li>
+    <li><b>작성자</b>(당일 근무자는 '· 당일' 표시)와 <b>공동근무</b>자를 고릅니다.</li>
+    <li><span class="btn">+ 카드 추가</span>로 카드마다 카테고리·제목·상태(진행중/보류/완료)·본문·첨부를 넣습니다. ☆를 눌러 ★<b>대표 카드</b>를 정하면 그 제목이 일지 제목이 됩니다. ↑ ↓로 순서, ×로 삭제.</li>
+    <li>중간에 <span class="btn">임시저장</span>(이 PC 브라우저에만 저장)할 수 있습니다.</li>
+    <li><span class="btn">저장하기</span> → 창이 닫히고 목록이 새로 고쳐집니다.</li>
+  </ol>
+  <table>
+    <tr><th>버튼</th><th>하는 일</th></tr>
+    <tr><td><span class="btn">참고일지</span></td><td>다른 일지를 옆에 띄워 보며 작성. 뜬 창은 끌어서 옮기고 모서리로 크기를 바꾸며, 창 밖의 작성 화면도 그대로 누를 수 있습니다</td></tr>
+    <tr><td>서식 도구</td><td>글꼴·크기·굵게·색·형광펜·정렬·목록·체크리스트·표·구분선·이미지(10MB)·링크·실행취소</td></tr>
+  </table>
+
+  <h3 id="logs-view">일지 보기 창</h3>
+  <figure><img src="img/logs-view.png" alt="업무일지 보기 창" loading="lazy"><figcaption>일지 보기 창 — 카드, 연결된 카드, 댓글</figcaption></figure>
+  <table>
+    <tr><th>위치</th><th>버튼</th><th>하는 일</th></tr>
+    <tr><td>머리</td><td>읽음 <span class="btn">N/M명</span></td><td>누가 읽었는지 (읽은 사람 / 전체 근무자, 마우스를 올리면 설명)</td></tr>
+    <tr><td></td><td><span class="btn">전체수정</span></td><td>같은 창이 작성 화면(수정)으로 바뀜 → <span class="btn">전체수정</span>으로 저장</td></tr>
+    <tr><td></td><td><span class="btn">삭제</span></td><td>본인 비밀번호 확인 후 삭제(복구 불가). 새 화면에서는 다른 버튼과 떨어져 빨간 글자로 보입니다</td></tr>
+    <tr><td></td><td><span class="btn">신규 화면</span></td><td>근무일지 일지 보기로 이동(주간·야간·주야)</td></tr>
+    <tr><td></td><td><span class="btn">참고일지</span></td><td>다른 일지를 이 창 <b>오른쪽에 붙여</b> 열어 비교합니다. 내 일지는 그대로 읽고 스크롤할 수 있고, 가운데 선을 끌거나 <kbd>←</kbd> <kbd>→</kbd> 키로 폭을 바꿉니다(마지막 폭은 이 PC에 기억). 다시 누르거나 패널의 × 로 닫습니다</td></tr>
+    <tr><td></td><td>참고 패널 안</td><td>검색·월 고르기 후 일지를 누르면 카드가 펼쳐지고, 카드를 누르면 미리보기에서 <span class="btn">내용 복사</span> · <span class="btn">링크 추가</span>(카드 수정 중일 때) / <span class="btn">링크 복사</span>. 목록은 <b>최근 200건까지</b> 보이므로 더 오래된 일지는 월이나 검색어로 찾습니다</td></tr>
+    <tr><td>일지 정보</td><td><span class="btn">수정</span><span class="who">관리자</span></td><td>날짜·작성자 등 정보 수정. 작성자를 바꾸려면 삭제 후 다시 작성</td></tr>
+    <tr><td>카드마다</td><td><span class="btn">수정</span> <span class="btn">삭제</span></td><td>카드 한 장만 그 자리에서 고치기·지우기</td></tr>
+    <tr><td></td><td><span class="btn">문의등록</span></td><td>이 카드로 문의사항 등록(아래 문의사항 참고)</td></tr>
+    <tr><td></td><td><span class="btn">이월</span></td><td>끝나지 않은 카드를 오늘 일지로 넘김</td></tr>
+    <tr><td>댓글</td><td><span class="btn">등록</span> <span class="btn">답글</span> 반응</td><td>@이름으로 멘션, <kbd>Shift</kbd>+<kbd>Enter</kbd> 줄바꿈. 삭제는 본인·관리자</td></tr>
+  </table>
+  <div class="note">남의 일지를 고치면 작성자에게 수정 알림이 갑니다. 다른 사람이 먼저 고쳤다면 최신 내용을 다시 불러옵니다. 저장하지 않고 닫으면 확인 창이 나옵니다.</div>
+  <div class="note">분류 이름에 '문의'가 들어간 카드를 <b>완료</b>로 바꾸면(카드 상태 변경·일지 저장 모두) 또는 완료 카드의 분류를 문의로 바꾸면 <b>문의사항</b> 메뉴에 한 건이 자동 등록됩니다. 진행중·보류로 저장한 카드는 등록되지 않습니다(<a href="#inquiry-auto">문의사항</a> 참고).</div>
+</section>
+
+<!-- ───────────────────────── 문의사항 ───────────────────────── -->
+<section class="menu" id="inquiry">
+  <h2>문의사항 <span class="path">/inquiries</span></h2>
+  <p class="lead">관제사 문의와 처리 결과를 한 줄씩 기록합니다. 표에서 바로 고치고, 상세 내용은 오른쪽 패널이나 새 창으로 봅니다.</p>
+
+  <h3 id="inquiry-list">목록 · 검색</h3>
+  <figure><img src="img/inquiry-list.png" alt="문의사항 목록" loading="lazy"><figcaption>문의사항 — 위쪽 거르기, 아래 표</figcaption></figure>
+  <table>
+    <tr><th>버튼·칸</th><th>하는 일</th></tr>
+    <tr><td>키워드·내용 검색</td><td><kbd>A&amp;B</kbd> 둘 다 포함, <kbd>!B</kbd> B 제외</td></tr>
+    <tr><td>월별 / 기간</td><td>연·월(모든 달) 또는 시작일~종료일</td></tr>
+    <tr><td>카테고리 / 상태</td><td>상태: 완료·진행중·PR등록·PR중복·추적관찰</td></tr>
+    <tr><td><span class="btn">전체 보기</span></td><td>조건 모두 지우기</td></tr>
+    <tr><td><span class="btn">… 엑셀로 받기</span></td><td>지금 조건(월·연·기간·전체) 그대로 엑셀 저장. 버튼 이름이 조건에 따라 바뀝니다</td></tr>
+    <tr><td><span class="btn">엑셀 올리기</span></td><td>.csv .xlsx .xls 파일로 한꺼번에 등록</td></tr>
+    <tr><td>표 머리 / 칸 두 번 누르기</td><td>정렬 / 그 칸 바로 고치기</td></tr>
+    <tr><td><span class="btn">삭제</span></td><td>새 화면에서는 마우스를 올린 줄에만 보입니다. 확인 창 후 삭제</td></tr>
+  </table>
+
+  <h3 id="inquiry-new">새 문의 등록</h3>
+  <ol class="steps">
+    <li><span class="btn">새 문의사항</span>을 누르면 표 위에 입력 줄이 펼쳐집니다.</li>
+    <li><b>발생일자</b>(필수), 시간(z, 예: 1932z), 관제사(섹터), 발생버전(예: 6.5), 카테고리, 키워드, 상세내용, 비고를 씁니다.</li>
+    <li><span class="btn">등록</span> (취소하려면 <span class="btn">취소</span>)</li>
+  </ol>
+  <h4>업무일지 카드에서 등록</h4>
+  <p>업무일지 보기 창의 카드 <span class="btn">문의등록</span>을 누르면(또는 카드 분류를 '문의사항'으로 저장하면) <b>문의사항 등록</b> 창이 열립니다. 발생일자·접수자·카테고리·키워드(카드 제목)는 자동으로 채워지고, 발생시간·관제사(섹터)·발생버전·PR번호(예: P0119)·추가 내용·비고를 더 써서 <span class="btn">등록</span>합니다. 카드 본문은 상세내용에 자동으로 들어가므로 추가 내용에는 덧붙일 말만 씁니다. 발생버전은 가장 최근에 입력된 버전이 미리 들어가며(새 문의 입력 줄도 같음), 다르면 고칩니다.</p>
+  <h4 id="inquiry-auto">문의 카드 자동 등록</h4>
+  <p>근무일지·업무일지에서 분류 이름에 '문의'가 들어간 카드가 <b>완료</b>되면 이 메뉴에 한 건이 자동으로 생깁니다. 기본값: 발생일자 = 그 일지 날짜, 발생시간 = 카드 작성 시각, 접수자 = 카드 작성자, 키워드 = 카드 제목, 상세내용 = 카드 본문, 발생버전 = 가장 최근에 입력된 문의사항의 발생버전, 상태 = 완료, 완료일자 = 완료한 날. 카테고리·관제사(섹터)·PR번호·비고는 비어 있으니 여기서 채웁니다. 진행중·보류 카드는 들어오지 않고, 같은 카드를 다시 완료해도 카드 하나당 한 번만 자동 등록됩니다. 등록 뒤 카드를 고치거나 지워도 문의사항은 그대로 남습니다. <span class="btn">문의등록</span>으로 따로 등록해 겹친 건은 목록에서 확인해 지웁니다.</p>
+
+  <h3 id="inquiry-view">상세 · 새 창</h3>
+  <figure><img src="img/inquiry-view.png" alt="문의사항 상세 창" loading="lazy"><figcaption>문의사항 상세(새 창)</figcaption></figure>
+  <p>번호나 내용을 누르면 오른쪽 상세 패널, ↗ 아이콘을 누르면 새 창으로 열립니다. 상세내용(표·이미지 가능)과 비고를 고쳐 <span class="btn">저장</span>(<kbd>Ctrl</kbd>+<kbd>S</kbd>)합니다. 저장하지 않고 닫으면 확인 창이 나옵니다.</p>
+</section>
+
+<!-- ───────────────────────── 관제시스템 문서 ───────────────────────── -->
+<section class="menu" id="techdocs">
+  <h2>관제시스템 문서 <span class="path">새 창</span></h2>
+  <p class="lead">절차서·기술 자료를 분류별로 보관합니다. 왼쪽 메뉴 <b>관제문서</b>를 누르면 별도 창으로 열리고, 창 위치·크기를 기억합니다.</p>
+  <figure><img src="img/techdocs.png" alt="관제시스템 문서 창" loading="lazy"><figcaption>왼쪽 분류 · 가운데 문서 목록 · 오른쪽 내용(가운데와 오른쪽 사이 막대로 너비 조절)</figcaption></figure>
+
+  <h3 id="techdocs-find">찾기</h3>
+  <table>
+    <tr><th>버튼·칸</th><th>하는 일</th></tr>
+    <tr><td><span class="btn">단어</span> / <span class="btn">의미</span></td><td>단어: 글자가 들어간 문서 / 의미: 뜻이 비슷한 문서까지(문장으로 검색, 예: 장애 처리 절차)</td></tr>
+    <tr><td>검색식</td><td><kbd>AIDC 업무</kbd> 두 단어 모두 · <kbd>AIDC OR FDT</kbd> 하나 이상 · <kbd>-야간 업무</kbd> 야간 제외</td></tr>
+    <tr><td>시작일~종료일, <span class="btn">검색</span></td><td>작성일 기간으로 거르기</td></tr>
+    <tr><td>왼쪽 분류 트리</td><td>프로젝트·카테고리별 목록</td></tr>
+    <tr><td><span class="btn">#TD:번호 복사</span></td><td>다른 일지·카드 본문에 붙이면 이 문서로 가는 링크가 됩니다</td></tr>
+  </table>
+
+  <h3 id="techdocs-write">새 문서 쓰기</h3>
+  <ol class="steps">
+    <li>왼쪽에서 분류를 먼저 고릅니다(새 문서에 자동으로 들어갑니다).</li>
+    <li>위쪽 <span class="btn">새 문서</span>.</li>
+    <li>프로젝트·카테고리·키워드·작성일, <b>제목</b>(필수), <b>요약</b>(1~3줄 — 의미 검색이 정확해집니다), 본문(표·이미지 붙여넣기), 첨부파일을 넣습니다.</li>
+    <li><span class="btn">저장</span> → '저장완료'.</li>
+  </ol>
+  <table>
+    <tr><th>버튼</th><th>하는 일</th></tr>
+    <tr><td><span class="btn">수정</span> <span class="btn">삭제</span><span class="who">작성자·관리자</span></td><td>다른 사람에게는 버튼이 꺼져 보입니다</td></tr>
+    <tr><td>체크 → <span class="btn">선택한 N건 분류 옮기기</span></td><td>여러 문서를 다른 분류로 한꺼번에 이동</td></tr>
+    <tr><td><span class="btn">분류 편집</span></td><td>프로젝트·카테고리 추가, 순서·사용 여부</td></tr>
+    <tr><td><span class="btn">문서 CSV</span> <span class="btn">첨부 CSV</span></td><td>CSV로 한꺼번에 가져오기</td></tr>
+  </table>
+  <div class="note">작성 중에 다른 문서를 누르면 '작성 중인 내용이 있습니다' 확인 창이 나옵니다.</div>
+</section>
+
+<!-- ───────────────────────── PR관리 ───────────────────────── -->
+<section class="menu" id="pr">
+  <h2>PR관리 <span class="path">/issues · /pr-batches</span></h2>
+  <p class="lead">PR 한 건 한 건의 이력(<b>개별 PR 목록</b>)과, 제작사 버전마다 PR을 검증하고 시험 확인서를 만드는 화면(<b>버전별 검증·보고</b>)이 있습니다. 위쪽 두 버튼으로 오갑니다.</p>
+
+  <h3 id="pr-issues">개별 PR 목록</h3>
+  <figure><img src="img/pr-issues.png" alt="개별 PR 목록" loading="lazy"><figcaption>개별 PR 목록 — 왼쪽 표, 오른쪽 상세·작성</figcaption></figure>
+  <ol class="steps">
+    <li><span class="btn">+ 이슈 등록</span></li>
+    <li>KAC PR번호, 제작사(LM) PR번호, 상태, 키워드, <b>제목</b>·<b>등록일</b>(필수), 조치일, 발생·수정 버전, 내용(표·이미지 가능)을 씁니다.</li>
+    <li><span class="btn">저장</span></li>
+  </ol>
+  <table>
+    <tr><th>버튼·칸</th><th>하는 일</th></tr>
+    <tr><td>전체 상태 / 정렬 / 검색 / 기간</td><td>상태: 진행중·수정완료·경고·반환. 정렬 기준과 ↑↓</td></tr>
+    <tr><td>체크 → 일괄 변경</td><td>여러 PR 상태를 한꺼번에 바꾸기</td></tr>
+    <tr><td>줄의 <span class="btn">팝업으로 열기</span></td><td>새 창(화면 반쪽)으로 보기 — 다른 PR·일지와 나란히 비교</td></tr>
+    <tr><td><span class="btn">검증 보고서</span></td><td>이 PR이 들어 있는 버전별 검증 화면으로 이동</td></tr>
+    <tr><td><span class="btn">수정</span> <span class="btn">삭제</span> <span class="btn">파일 추가</span></td><td>고치기·지우기·첨부(20MB)</td></tr>
+    <tr><td>코멘트 <span class="btn">등록</span></td><td>PR에 의견 남기기</td></tr>
+  </table>
+
+  <h3 id="pr-batches">버전별 검증·보고</h3>
+  <figure><img src="img/pr-batches.png" alt="버전별 검증 화면" loading="lazy"><figcaption>왼쪽 버전 목록, 오른쪽 선택한 버전의 1·2·3 단계</figcaption></figure>
+  <h4>신규 버전 만들기</h4>
+  <ol class="steps">
+    <li>왼쪽 <span class="btn">+ 신규 버전</span></li>
+    <li><b>버전</b>(예: SKYPROD 6.6g2)·<b>수정일자</b>(필수), 이전 버전, 검증완료일.</li>
+    <li><b>보고서 기본값</b>: Skyline 버전, Adaptation 버전, 시험 세그먼트(기본 '시험평가시스템') — 시험 확인서에 자동으로 들어갑니다.</li>
+    <li>(선택) <b>PR 목록 엑셀</b> <span class="btn">엑셀 선택</span>(.xlsx/.xlsm) — 고르면 버전을 만들면서 PR 목록과 개별 PR이 자동으로 채워집니다.</li>
+    <li><span class="btn">버전 만들기</span> 또는 <span class="btn">버전 만들고 목록 채우기</span></li>
+  </ol>
+  <p>버전 상세 위쪽: <span class="btn">버전 정보 수정</span>, <span class="btn">버전 삭제</span>, 검증 보고 N/M.</p>
+  <h4>1. PR 목록</h4>
+  <table>
+    <tr><th>버튼</th><th>하는 일</th></tr>
+    <tr><td><span class="btn">엑셀로 한 번에 등록</span></td><td>제작사 PR 목록 엑셀 첫 시트의 PR 번호·제목으로 등록</td></tr>
+    <tr><td><span class="btn">개별 PR에서 가져오기</span></td><td>개별 PR 목록에서 골라 <span class="btn">선택 PR 등록</span></td></tr>
+    <tr><td><span class="btn">직접 추가</span></td><td>PR번호·제목 직접 입력</td></tr>
+    <tr><td><span class="btn">편집</span> <span class="btn">삭제</span></td><td>다른 근무자의 검증 기록이 있는 PR은 관리자만 삭제할 수 있습니다</td></tr>
+  </table>
+
+  <h3 id="pr-verify">2. 검증하기 · 3. 원본 문서</h3>
+  <h4>화면에서 검증 입력</h4>
+  <ol class="steps">
+    <li>PR 줄의 <span class="btn">내 검증 입력</span>(이미 썼으면 <span class="btn">내 검증 수정</span>).</li>
+    <li>보고서 공통 정보(Skyline·Adaptation·시험 세그먼트·시험 참석자)는 버전 기본값이 채워져 있습니다. 다르면 <span class="btn">바꾸기</span>.</li>
+    <li>시험일자, 시험 시작·종료, <b>시험방법</b>·<b>시험결과</b>(필수, 표·이미지 가능), 비고, <b>판정</b>.</li>
+    <li><span class="btn">저장하고 보고서 만들기</span></li>
+  </ol>
+  <h4>엑셀로 한꺼번에</h4>
+  <p><span class="btn">엑셀 올리기</span>로 시험확인서 엑셀(.xlsx/.xlsm)을 올립니다. 끌어다 놓아도 됩니다. 확정된 PR 목록에 있는 PR만 연결되고, 목록에 없는 PR 시트는 경고 후 건너뜁니다. 다시 올리면 <b>내 기록만</b> 바뀌고, 다른 근무자의 기록은 그대로입니다.</p>
+  <h4>보고서 PDF</h4>
+  <p><b>보고서를 PDF 한 파일로 받기</b>에서 전체 근무자 또는 특정 근무자, 체크한 PR만 또는 전체를 골라 <span class="btn">PDF 받기</span>. PR마다 책갈피가 붙습니다. PR 한 건은 줄의 <span class="btn">보고서 보기</span> / <span class="btn">PDF 받기</span>로 봅니다.</p>
+  <table>
+    <tr><th>버튼·칸</th><th>하는 일</th></tr>
+    <tr><td>거르기</td><td>전체 PR · 검증 안 한 PR · PASS · REJECT · 미판정 · 보류 · 제외, PR 번호·제목 검색</td></tr>
+    <tr><td>검증 기록 <span class="btn">삭제</span><span class="who">본인·관리자</span></td><td>내 검증 기록 지우기</td></tr>
+  </table>
+  <h4>3. 원본 문서</h4>
+  <p><b>문서 종류</b>(PR목록·제작사 절차서·테스트절차·수정문서·합의서·납품문서·검증결과·기타)를 고르고 <span class="btn">파일 선택</span> 또는 끌어다 놓기(여러 개, 파일당 20MB). 종류별 목록에서 <span class="btn">보기</span>(PDF·이미지·txt는 브라우저에서 바로) / <span class="btn">받기</span> / <span class="btn">삭제</span>.</p>
+  <div class="note">검증 결과와 보고서는 모든 근무자가 볼 수 있습니다.</div>
+</section>
+
+<!-- ───────────────────────── 근무편성 ───────────────────────── -->
+<section class="menu" id="roster">
+  <h2>근무편성 <span class="path">새 창</span></h2>
+  <p class="lead">월간 근무지정표·근무일정표·대체근무·대휴·연차와 결재용 PDF를 만드는 도구입니다. 자료는 SkyWatch 서버에 저장되어 어느 PC에서 열어도 같고, 로그인한 근무자는 누구나 고칩니다.</p>
+  <table>
+    <tr><th>할 일</th><th>방법</th></tr>
+    <tr><td>처음 옮기기 (한 번)</td><td>예전 근무편성 HTML 파일을 열어 <span class="btn">💾 백업</span>으로 JSON 파일을 받은 뒤, 근무편성 창에서 <span class="btn">📥 복원</span>으로 올립니다.</td></tr>
+    <tr><td>다음 달 계획</td><td>기준월을 다음 달로 → 캘린더에서 연차·대휴·대체 지정 → 결재 관리 <span class="btn">당초 계획 확정 (제1차)</span> → <span class="btn">📄 묶음 PDF</span></td></tr>
+    <tr><td>그 달 중 변경</td><td>캘린더에서 고칩니다. 결재 시트가 필요하면 결재 관리 <span class="btn">변경 확정 (제2차)</span>, 아니면 고치기만 합니다.</td></tr>
+    <tr><td>저장 확인</td><td>맨 위 오른쪽 「서버에 저장됨 (시:분)」. 빨간 「저장 안 됨」이면 창을 닫지 말고 <span class="btn">다시 저장</span>.</td></tr>
+    <tr><td>잘못 고쳤을 때</td><td>입력·설정 → 데이터 관리 <span class="btn">직전 판으로 되돌리기</span>(가장 최근 통째 변경 전, 또는 약 10분 이상 쉬었다가 고치기 시작하기 전의 판), 그보다 앞이면 <span class="btn">📥 복원</span>으로 백업 JSON.</td></tr>
+  </table>
+  <div class="note">연차·대체·대휴는 근무편성에서만 입력합니다. 「근무 스케줄」에서는 예전 기록만 보이고, 새로 넣으려면 그 창의 <span class="btn">근무편성 열기</span>를 누릅니다. 자세한 사용법은 도구 안 「사용방법」 탭에 있습니다.</div>
+</section>
+
+<!-- ───────────────────────── 통근비 계산 ───────────────────────── -->
+<section class="menu" id="commute">
+  <h2>통근비 계산 <span class="path">새 창</span></h2>
+  <p class="lead">ERP 근태 엑셀을 올리면 근무자별 통근비 달력과 지급일수가 자동으로 나옵니다. 올린 근태 자료는 달별로 SkyWatch 서버에 쌓이고, 설정·고친 칸과 함께 어느 PC에서 열어도 같습니다. 로그인한 근무자는 누구나 고칩니다.</p>
+  <table>
+    <tr><th>할 일</th><th>방법</th></tr>
+    <tr><td>월 통근비 정리</td><td><span class="btn">파일 업로드</span>로 그 달 ERP 근태 엑셀 → 확인창에서 저장 → 칸을 눌러 근무코드·지급일 고치기 → <span class="btn">PDF 저장 (인쇄)</span></td></tr>
+    <tr><td>지난 달 보기</td><td>파일 없이 위쪽 연·월에서 고릅니다. 같은 달을 다시 올리면 그 달만 새 파일로 바뀝니다(고친 칸은 남음).</td></tr>
+    <tr><td>달 목록·삭제·기간 합계</td><td><span class="btn">저장된 달 · 기간 합계</span> → 저장된 달(보기·삭제) / 기간 합계(시작 달~끝 달, 근무자별·달별 지급일수)</td></tr>
+    <tr><td>저장 확인</td><td>맨 위 오른쪽 「서버에 저장됨 (시:분)」. 빨간 「저장 안 됨」이면 창을 닫지 말고 <span class="btn">다시 저장</span>.</td></tr>
+    <tr><td>처음 한 번</td><td>엑셀을 올린 뒤 <span class="btn">설정</span> → 기본 근무자 → <span class="btn">명단에 추가</span>. 순서와 근무유형을 맞춰 두면 다음부터 그대로 나옵니다.</td></tr>
+  </table>
+  <div class="note">저장되는 것: 올린 근태 자료(달별, 계산에 쓰는 칸만 — 사번·소속 제외), 표 제목, 설정(기본 근무자·공휴일/휴무일·복무명 약어·코드별 지급여부), 달별 고친 칸·근무자 추가/삭제/순서·비대상.<br>저장 안 되는 것: 원본 보기에서 고친 값(창을 다시 열면 사라집니다. 계속 남길 수정은 달력 칸에서). 자세한 사용법은 도구 안 <span class="btn">도움말</span>에 있습니다.</div>
+</section>
+</main>
+</div>
+<div class="zoom" id="zoom" role="dialog" aria-label="사진 크게 보기"><img alt=""></div>
+<script>
+  // 사진: 없으면 숨기고, 누르면 크게
+  var zoom = document.getElementById('zoom');
+  document.querySelectorAll('figure img').forEach(function (img) {
+    img.addEventListener('error', function () { img.closest('figure').style.display = 'none'; });
+    img.addEventListener('click', function () { zoom.querySelector('img').src = img.src; zoom.classList.add('show'); });
+  });
+  zoom.addEventListener('click', function () { zoom.classList.remove('show'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') zoom.classList.remove('show'); });
+  // 목차: 지금 읽는 절 표시
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+  var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  function mark() {
+    var cur = 0;
+    targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top < 120) cur = i; });
+    links.forEach(function (a, i) { a.classList.toggle('on', i === cur); });
+  }
+  window.addEventListener('scroll', mark, { passive: true });
+  window.addEventListener('hashchange', mark);
+  mark();
+</script>
+</body>
+</html>

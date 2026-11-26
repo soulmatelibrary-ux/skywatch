@@ -1,0 +1,28 @@
+# 비밀 — 절대 올리지 않는다
+.env
+**/.env
+!backend/.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/temp-dist/
+
+# 실행 중 생기는 자료 (실제 운영 자료)
+backend/uploads/
+backend/backups/
+backend/logs/
+backend/models/
+download/
+*.log
+*.backup
+
+# OS
+.DS_Store
+Thumbs.db

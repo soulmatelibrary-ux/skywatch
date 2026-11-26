@@ -1,0 +1,1501 @@
+{
+  "_comment": "항공관제 업무일지 DB 22,080건 분석 기반 도메인 동의어 그룹. 2026-11-18: 근무/교대, 비행단계, 기상, 고도/속도, 통신, 활주로, 긴급상황, 시스템 세부모듈, SW/HW, 비행검사, 공역관리 등 80+ 그룹 추가 및 기존 그룹 보강 (총 300+ 그룹). build_synonyms.py 로 co-occurrence 분석 가능.",
+  "_updated": "2026-11-18",
+  "synonyms": [
+    [
+      "한/일",
+      "한일",
+      "한-일",
+      "한국 일본",
+      "Korea Japan",
+      "KR JP",
+      "일본측"
+    ],
+    [
+      "중일",
+      "중-일",
+      "중국 일본",
+      "대련",
+      "상해",
+      "중국ACC",
+      "후쿠오카",
+      "Fukuoka"
+    ],
+    [
+      "AIDC",
+      "항공데이터통신",
+      "데이터링크통신",
+      "Air Data",
+      "항공자료교환",
+      "항공통제데이터교환"
+    ],
+    [
+      "AIDC 미들웨어",
+      "AIDC Middleware",
+      "미들웨어",
+      "Middleware",
+      "AIDC 프로세스"
+    ],
+    [
+      "AIDC A-E",
+      "Apply-Erase",
+      "A-E 발생",
+      "Agent Error",
+      "AIDC 에러",
+      "AIDC Fail",
+      "AIDC 실패",
+      "AIDC 장애"
+    ],
+    [
+      "LRM",
+      "LRM-RMK",
+      "MSG SEQUENCE ERROR",
+      "AIDC LRM",
+      "Local RFS Monitor"
+    ],
+    [
+      "AIDC CRV",
+      "CRV 운용",
+      "AIDC CPL",
+      "AIDC TOC",
+      "AIDC ODF"
+    ],
+    [
+      "AIDC 로그",
+      "AIDC Log",
+      "AIDC 모니터링",
+      "AIDC 점검"
+    ],
+    [
+      "장애",
+      "장애내역",
+      "장애발생",
+      "장애상황",
+      "장애조치",
+      "장애처리"
+    ],
+    [
+      "실패",
+      "Fail",
+      "오류",
+      "에러",
+      "Error",
+      "고장",
+      "이상",
+      "불량",
+      "비정상",
+      "미동작",
+      "미작동"
+    ],
+    [
+      "이슈",
+      "issue",
+      "Issue",
+      "문제",
+      "bug",
+      "버그",
+      "결함"
+    ],
+    [
+      "FDP",
+      "Flight Data Processor",
+      "비행자료처리기",
+      "FDP 모듈",
+      "FDP 프로세스",
+      "Cold Start",
+      "ColdStart",
+      "FDP COLD",
+      "FDP coldstart",
+      "콜드스타트",
+      "시스템초기화",
+      "PLA",
+      "PLB",
+      "LATC",
+      "모듈전환",
+      "PLA전환",
+      "PLB전환",
+      "체크포인트",
+      "checkpoint"
+    ],
+    [
+      "WarmStart",
+      "Warm Start",
+      "warmstart",
+      "warm start",
+      "웜스타트",
+      "웜 시작"
+    ],
+    [
+      "COD",
+      "Cold Start Mode",
+      "콜드모드",
+      "COD 발생"
+    ],
+    [
+      "FDT",
+      "Flight Data Terminal",
+      "비행자료단말기",
+      "비행자료단말",
+      "FDT 프로그램"
+    ],
+    [
+      "FPCS",
+      "Flight Plan Clearance System",
+      "비행계획허가시스템",
+      "FPCS Replace",
+      "FPCS 필터"
+    ],
+    [
+      "ATFM",
+      "Air Traffic Flow Management",
+      "항공교통흐름관리",
+      "ATFMSvr"
+    ],
+    [
+      "AFTN",
+      "Aeronautical Fixed Telecommunications",
+      "항공고정통신망",
+      "AFTN 메시지"
+    ],
+    [
+      "CPDLC",
+      "Controller Pilot Data Link",
+      "조종사관제사통신",
+      "CFL",
+      "데이터링크 통신"
+    ],
+    [
+      "CA",
+      "CA경고",
+      "Conflict Alert",
+      "충돌경보",
+      "장기충돌경보"
+    ],
+    [
+      "STCA",
+      "Short Term Conflict Alert",
+      "단기충돌경고",
+      "STCA경고",
+      "단기충돌"
+    ],
+    [
+      "MTCD",
+      "Medium Term Conflict Detection",
+      "중기충돌감지",
+      "중기충돌"
+    ],
+    [
+      "RA",
+      "Restrict Alert",
+      "제한구역 침입 경보"
+    ],
+    [
+      "SSR",
+      "Secondary Surveillance Radar",
+      "이차감시레이더",
+      "SSR 코드"
+    ],
+    [
+      "ADS-B",
+      "Automatic Dependent Surveillance",
+      "광역감시",
+      "ADS-B 항적"
+    ],
+    [
+      "ARTS",
+      "Automated Radar Terminal System",
+      "자동화레이더단말시스템"
+    ],
+    [
+      "SDR",
+      "Surveillance Data Recording",
+      "감시자료기록",
+      "SDR Gate",
+      "SDR 자료"
+    ],
+    [
+      "ADMS",
+      "항공데이터관리시스템"
+    ],
+    [
+      "SID",
+      "표준출발절차",
+      "Standard Instrument Departure"
+    ],
+    [
+      "STAR",
+      "표준도착절차",
+      "Standard Terminal Arrival Route"
+    ],
+    [
+      "IFR",
+      "계기비행",
+      "Instrument Flight Rules",
+      "IFR 통계",
+      "IFR Rule"
+    ],
+    [
+      "VFR",
+      "시계비행",
+      "Visual Flight Rules"
+    ],
+    [
+      "RPL",
+      "반복비행계획서",
+      "Repetitive Flight Plan",
+      "반복 비행계획"
+    ],
+    [
+      "CDO",
+      "연속강하운항",
+      "Continuous Descent Operations"
+    ],
+    [
+      "FIR",
+      "비행정보구역",
+      "Flight Information Region",
+      "FIR 공역"
+    ],
+    [
+      "CWP",
+      "Controller Working Position",
+      "관제사석",
+      "관제사 위치"
+    ],
+    [
+      "비행계획서",
+      "FPL",
+      "Flight Plan",
+      "비행계획",
+      "비행계획관리",
+      "오류비행계획서",
+      "비표준비행계획서"
+    ],
+    [
+      "RFL",
+      "요청고도",
+      "Requested Flight Level",
+      "순항고도"
+    ],
+    [
+      "항적",
+      "track",
+      "Aircraft Track",
+      "시스템항적",
+      "항적전시",
+      "항적 분석",
+      "시스템트랙",
+      "System Track"
+    ],
+    [
+      "레이더",
+      "Radar",
+      "RAD",
+      "레이더 데이터",
+      "레이더 수신",
+      "센서"
+    ],
+    [
+      "Correlation",
+      "상관",
+      "항적상관",
+      "Corr",
+      "코릴레이션"
+    ],
+    [
+      "Skyline",
+      "관제시스템",
+      "관제지원시스템",
+      "ATC System",
+      "스카이라인",
+      "ATACMS",
+      "관제자동화"
+    ],
+    [
+      "적응자료",
+      "Adaptation",
+      "어뎁테이션",
+      "어답테이션",
+      "AdaptationTool",
+      "Adap"
+    ],
+    [
+      "PR",
+      "Problem Report",
+      "PR 수정",
+      "PR 재현",
+      "장애보고서"
+    ],
+    [
+      "재시작",
+      "재기동",
+      "리부팅",
+      "재부팅",
+      "Restart",
+      "Reboot"
+    ],
+    [
+      "복구",
+      "정상화",
+      "조치완료",
+      "Recovery",
+      "Restore",
+      "복원"
+    ],
+    [
+      "점검",
+      "유지보수",
+      "정기점검",
+      "예방점검",
+      "Maintenance",
+      "점검일지"
+    ],
+    [
+      "배포",
+      "설치",
+      "패치",
+      "Deploy",
+      "Install",
+      "Patch",
+      "업데이트",
+      "upgrade"
+    ],
+    [
+      "검증",
+      "시험",
+      "테스트",
+      "Test",
+      "Verification",
+      "시험평가",
+      "T&E"
+    ],
+    [
+      "모니터링",
+      "Monitoring",
+      "감시",
+      "모니터",
+      "현황감시"
+    ],
+    [
+      "분석",
+      "Analysis",
+      "검토",
+      "조사",
+      "추가분석",
+      "원인분석"
+    ],
+    [
+      "취약점",
+      "보안",
+      "Security",
+      "Vulnerability",
+      "보안점검",
+      "log4j"
+    ],
+    [
+      "백업",
+      "backup",
+      "자료보관",
+      "복사",
+      "아카이브"
+    ],
+    [
+      "이중화",
+      "redundancy",
+      "Failover",
+      "Fail Over",
+      "장애복구"
+    ],
+    [
+      "로그",
+      "log",
+      "로그파일",
+      "로그분석",
+      "로깅"
+    ],
+    [
+      "형상관리",
+      "Configuration",
+      "버전관리",
+      "SVN",
+      "소스코드관리"
+    ],
+    [
+      "교육",
+      "훈련",
+      "Training",
+      "직무교육",
+      "교육훈련"
+    ],
+    [
+      "보고",
+      "report",
+      "상신",
+      "보고서",
+      "결과보고"
+    ],
+    [
+      "접수",
+      "처리",
+      "조치",
+      "handling",
+      "처리현황"
+    ],
+    [
+      "문의",
+      "문의사항",
+      "질문",
+      "요청사항",
+      "질의"
+    ],
+    [
+      "서버",
+      "Server",
+      "장비",
+      "단말",
+      "WAS",
+      "APP서버"
+    ],
+    [
+      "DB",
+      "데이터베이스",
+      "Database",
+      "Oracle",
+      "오라클"
+    ],
+    [
+      "네트워크",
+      "통신",
+      "회선",
+      "LAN",
+      "망",
+      "Network"
+    ],
+    [
+      "모뎀",
+      "통신장비",
+      "회선장애",
+      "모뎀고장",
+      "회선오류"
+    ],
+    [
+      "외부연계",
+      "외부인터페이스",
+      "인터페이스",
+      "연동",
+      "Interface",
+      "외부 인터페이스"
+    ],
+    [
+      "미들웨어",
+      "Middleware",
+      "프로세스",
+      "Process",
+      "데몬",
+      "daemon"
+    ],
+    [
+      "알람",
+      "경보",
+      "알림",
+      "경고",
+      "Alarm",
+      "Alert"
+    ],
+    [
+      "스크립트",
+      "script",
+      "배치",
+      "batch",
+      "자동화"
+    ],
+    [
+      "인천",
+      "Incheon",
+      "RKSI",
+      "인천ACC",
+      "인천공사"
+    ],
+    [
+      "대구",
+      "Daegu",
+      "RKTN",
+      "대구ACC",
+      "대구정보부"
+    ],
+    [
+      "제주",
+      "Jeju",
+      "RKPC",
+      "제주APP",
+      "제주남부",
+      "제주북부"
+    ],
+    [
+      "김포",
+      "Gimpo",
+      "RKSS",
+      "김포APP",
+      "김포PDC"
+    ],
+    [
+      "서울APP",
+      "서울접근관제",
+      "Seoul Approach",
+      "RKSN"
+    ],
+    [
+      "광주",
+      "Gwangju",
+      "RKJJ",
+      "광주ACC"
+    ],
+    [
+      "군산",
+      "Gunsan",
+      "RKJK"
+    ],
+    [
+      "무안",
+      "Muan",
+      "RKJB"
+    ],
+    [
+      "ACC",
+      "관제센터",
+      "Area Control Center",
+      "항공교통센터"
+    ],
+    [
+      "APP",
+      "접근관제",
+      "Approach Control"
+    ],
+    [
+      "관제사",
+      "Controller",
+      "항공교통관제사"
+    ],
+    [
+      "관제팀장",
+      "팀장",
+      "Team Leader"
+    ],
+    [
+      "관제과",
+      "항공관제과",
+      "ATC Department"
+    ],
+    [
+      "항행전자부",
+      "전자부",
+      "통신전자과",
+      "항행통신부",
+      "전자팀"
+    ],
+    [
+      "LG CNS",
+      "제작사",
+      "공급사",
+      "vendor",
+      "아이비리더스"
+    ],
+    [
+      "통계",
+      "Statistics",
+      "이용현황",
+      "항공교통량"
+    ],
+    [
+      "순항고도배정",
+      "RVSM",
+      "고도배정",
+      "순항고도"
+    ],
+    [
+      "NOTAM",
+      "노탐",
+      "항공고시보",
+      "항공정보"
+    ],
+    [
+      "항공회랑",
+      "비행회랑",
+      "항공로",
+      "항로",
+      "Airway"
+    ],
+    [
+      "섹터",
+      "Sector",
+      "공역",
+      "Jurisdiction"
+    ],
+    [
+      "단축항공로",
+      "단거리항공로",
+      "RNP",
+      "RNAV"
+    ],
+    [
+      "영공통과",
+      "과항",
+      "비행허가",
+      "ATC Clearance"
+    ],
+    [
+      "A&M",
+      "Aeronautical & Meteorological",
+      "항공, 기상 정보"
+    ],
+    [
+      "ABC to RBC",
+      "Allocated Beacon Code to Requested Beacon Code"
+    ],
+    [
+      "ABI",
+      "Advance Boundary Information"
+    ],
+    [
+      "ACID",
+      "AirCraft ID"
+    ],
+    [
+      "AIMS",
+      "Aircraft Information Management System / Airplane Information Management System"
+    ],
+    [
+      "AIP",
+      "Aeronautical Information Publication"
+    ],
+    [
+      "AMA",
+      "Area Minimum Altitude",
+      "지역최저고도"
+    ],
+    [
+      "AMHS",
+      "Aeronautical Message Handling Service",
+      "AFTN을 중계해서 전송해주는 중계기"
+    ],
+    [
+      "ANR",
+      "Air Navigation Regions",
+      "항행안전 관리권역"
+    ],
+    [
+      "AOC",
+      "Assumption of Control"
+    ],
+    [
+      "ARTC",
+      "Air Route Traffic Control"
+    ],
+    [
+      "ATA",
+      "Actual Time of Arrive",
+      "실제 도착 시간"
+    ],
+    [
+      "ATD",
+      "Actual Time of Departure",
+      "실제 출발 시간"
+    ],
+    [
+      "ATN",
+      "Aeronautical Telecommunication Network",
+      "항공통신망"
+    ],
+    [
+      "CATA",
+      "Civil Aircraft Training Area"
+    ],
+    [
+      "CPL",
+      "Current flight PLan"
+    ],
+    [
+      "CTA",
+      "ConTrol Area"
+    ],
+    [
+      "DOF",
+      "Date Of Flight",
+      "비행 날짜"
+    ],
+    [
+      "EFS",
+      "Electronic Flight Strip",
+      "전자 비행 계획서 스트립"
+    ],
+    [
+      "EFW",
+      "Electronic Flight strip Window",
+      "전자 비행 스트립 현시장치"
+    ],
+    [
+      "EOBT",
+      "Estimated Off-Block Time",
+      "출발예정시각"
+    ],
+    [
+      "FDR",
+      "Flight Data Repair"
+    ],
+    [
+      "FIS-VFR",
+      "Flight Info. Service VFR"
+    ],
+    [
+      "FSP",
+      "Flight Strip Printer",
+      "비행 스트립 프린터"
+    ],
+    [
+      "GRE",
+      "Graphic Route Editing",
+      "시각적 항로 수정"
+    ],
+    [
+      "HCI",
+      "Human Computer Interface"
+    ],
+    [
+      "ICAO",
+      "International Civil Aviation Organizations",
+      "국제 민간 항공 기구"
+    ],
+    [
+      "KST",
+      "Korea Standard Time"
+    ],
+    [
+      "MCRC",
+      "Master Control & Report Center"
+    ],
+    [
+      "MOA",
+      "Military Operation Area",
+      "군사 작전 지역"
+    ],
+    [
+      "MSAW",
+      "Minimum Safe Altitude Warning",
+      "최저 고도 경보"
+    ],
+    [
+      "NAIMS",
+      "National Airspace Information System",
+      "국가공역종합관리시스템"
+    ],
+    [
+      "NTIF",
+      "NoTam InterFace"
+    ],
+    [
+      "NWIF",
+      "Notam Window InterFace"
+    ],
+    [
+      "NWPS",
+      "Notam Window Parsing Server"
+    ],
+    [
+      "PBN",
+      "Performance Based Navigation",
+      "성능기반항행"
+    ],
+    [
+      "PDC",
+      "Pre-Departure Clearance",
+      "사전출발 허가서"
+    ],
+    [
+      "PSR",
+      "Primary Surveillance Radar"
+    ],
+    [
+      "QNH",
+      "Query Nautical Height"
+    ],
+    [
+      "RDI",
+      "Reduced Data Instance"
+    ],
+    [
+      "RDP",
+      "Radar Data Processor",
+      "레이더자료처리기"
+    ],
+    [
+      "RMA",
+      "Regional Monitoring Agency"
+    ],
+    [
+      "RVA",
+      "RVSM Equipped",
+      "RVSM 장비를 갖춘 항공기"
+    ],
+    [
+      "RVX",
+      "RVSM eXempt",
+      "RVSM 면제"
+    ],
+    [
+      "SDP",
+      "Surveillance(=Sensor) Data Processor",
+      "감시자료처리기"
+    ],
+    [
+      "SMC",
+      "System Monitoring & Control",
+      "감시 및 제어 시스템"
+    ],
+    [
+      "SSR Code",
+      "Secondary Serveillance Radar Code",
+      "SQ",
+      "SQ코드",
+      "Squawk"
+    ],
+    [
+      "TAF",
+      "Terminal Aerodrome Forecasts"
+    ],
+    [
+      "TAS",
+      "True Air Speed",
+      "진대기 속도"
+    ],
+    [
+      "TCAS",
+      "Traffic Collision Avoidance System/ Traffic alert and Collision Avoidance System",
+      "항공기의 충돌 경보 시스템"
+    ],
+    [
+      "TEET",
+      "Total Estimated Elapsed Time",
+      "전체 예상 경과 시간"
+    ],
+    [
+      "TMA",
+      "Terminal Manoeuvring(=Control) Area",
+      "공항 터미널 지역"
+    ],
+    [
+      "TOC",
+      "Transfer Of Control"
+    ],
+    [
+      "TRS",
+      "Time Reference System",
+      "시간동기 시스템"
+    ],
+    [
+      "TSUA",
+      "Temporally Special Usage Area"
+    ],
+    [
+      "UTC",
+      "Universal Time Coordinated",
+      "협정세계시"
+    ],
+    [
+      "VOR",
+      "VHF Omni-directional radio Range",
+      "전방향 표지시설"
+    ],
+    [
+      "WIMS",
+      "Weather Interface Management System"
+    ],
+    [
+      "WTC",
+      "Wake Turbulence Categories",
+      "후방 난기류 카테고리"
+    ],
+    [
+      "YFR",
+      "IFR to VFR"
+    ],
+    [
+      "ZFR",
+      "VFR to IFR"
+    ],
+    [
+      "NACp",
+      "Navigation Accuracy Category for position"
+    ],
+    [
+      "NIC",
+      "Navigation Integrity Category"
+    ],
+    [
+      "SIL",
+      "Surveillance Integrity Level"
+    ],
+    [
+      "NUCP",
+      "Navigation Uncertainty Category"
+    ],
+    [
+      "SA",
+      "SA경고",
+      "SA 경고",
+      "STSA",
+      "Short Term Separation Alert",
+      "단기 분리 경보"
+    ],
+    [
+      "데이터블럭",
+      "데이터 블럭",
+      "Datablock",
+      "Data Block",
+      "전시블럭",
+      "DB전시",
+      "항적블럭"
+    ],
+    [
+      "이중항적",
+      "이중 항적",
+      "Duplicate Track",
+      "중복항적",
+      "이중생성",
+      "항적중복"
+    ],
+    [
+      "경고전시",
+      "경고 전시",
+      "경고표시",
+      "경고 표시",
+      "경고지속",
+      "경보전시"
+    ],
+    [
+      "경고해제",
+      "경고 해제"
+    ],
+    [
+      "관제이양",
+      "Handover",
+      "Hand off",
+      "Handoff",
+      "이양",
+      "Initiate",
+      "APCH",
+      "Assume",
+      "이관"
+    ],
+    [
+      "KAL",
+      "Korean Air",
+      "대한항공"
+    ],
+    [
+      "AAR",
+      "Asiana Airlines",
+      "아시아나항공"
+    ],
+    [
+      "JJA",
+      "Jeju Air",
+      "제주항공"
+    ],
+    [
+      "JNA",
+      "Jin Air",
+      "진에어"
+    ],
+    [
+      "TWB",
+      "T'way Air",
+      "티웨이항공"
+    ],
+    [
+      "ABL",
+      "Air Busan",
+      "에어부산"
+    ],
+    [
+      "ESR",
+      "Eastar Jet",
+      "이스타항공"
+    ],
+    [
+      "CES",
+      "China Eastern Airlines",
+      "중국동방항공"
+    ],
+    [
+      "VJC",
+      "VietJet Air",
+      "비엣젯항공"
+    ],
+    [
+      "CSN",
+      "China Southern Airlines",
+      "중국남방항공"
+    ],
+    [
+      "ANA",
+      "All Nippon Airways",
+      "전일본공수"
+    ],
+    [
+      "CCA",
+      "Air China",
+      "중국국제항공"
+    ],
+    [
+      "HVN",
+      "Vietnam Airlines",
+      "베트남항공"
+    ],
+    [
+      "CAL",
+      "China Airlines",
+      "중화항공"
+    ],
+    [
+      "FDX",
+      "FedEx Express",
+      "페덱스"
+    ],
+    [
+      "JAL",
+      "Japan Airlines",
+      "일본항공"
+    ],
+    [
+      "QTR",
+      "Qatar Airways",
+      "카타르항공"
+    ],
+    [
+      "EVA",
+      "EVA Air",
+      "에바항공"
+    ],
+    [
+      "PAC",
+      "Polar Air Cargo",
+      "폴라에어카고"
+    ],
+    [
+      "UPS",
+      "UPS Airlines"
+    ],
+    [
+      "SIA",
+      "Singapore Airlines",
+      "싱가포르항공"
+    ],
+    [
+      "THA",
+      "Thai Airways",
+      "타이항공"
+    ],
+    [
+      "MGL",
+      "Miat Mongolian Airlines",
+      "미아트몽골항공"
+    ],
+    [
+      "ETD",
+      "Etihad Airways",
+      "에티하드항공"
+    ],
+    [
+      "CPA",
+      "Cathay Pacific",
+      "캐세이퍼시픽항공"
+    ],
+    [
+      "THY",
+      "Turkish Airlines",
+      "터키항공"
+    ],
+    [
+      "HKE",
+      "Hong Kong Express",
+      "홍콩익스프레스항공"
+    ],
+    [
+      "DLH",
+      "Lufthansa",
+      "루프트한자"
+    ],
+    [
+      "TTW",
+      "Tigerair Taiwan",
+      "타이거에어 타이완"
+    ],
+    [
+      "APJ",
+      "Peach Aviation",
+      "피치항공"
+    ],
+    [
+      "PAL",
+      "Philippine Airlines",
+      "필리핀항공"
+    ],
+    [
+      "DAL",
+      "Delta Air Lines",
+      "델타항공"
+    ],
+    [
+      "UAE",
+      "Emirates",
+      "에미레이트항공"
+    ],
+    [
+      "CEB",
+      "Cebu Pacific",
+      "세부퍼시픽항공"
+    ],
+    [
+      "KLM",
+      "KLM Royal Dutch Airlines"
+    ],
+    [
+      "ACA",
+      "Air Canada",
+      "에어캐나다"
+    ],
+    [
+      "RKPK",
+      "김해국제공항",
+      "Gimhae International Airport"
+    ],
+    [
+      "RKTU",
+      "청주국제공항",
+      "Cheongju International Airport"
+    ],
+    [
+      "RKJY",
+      "여수공항",
+      "Yeosu Airport"
+    ],
+    [
+      "RKNY",
+      "양양국제공항",
+      "Yangyang International Airport"
+    ],
+    [
+      "RKSO",
+      "오산공군기지",
+      "Osan Air Base"
+    ],
+    [
+      "플랏",
+      "Plot",
+      "레이더 플랏",
+      "Radar Plot"
+    ],
+    [
+      "BUA",
+      "부안",
+      "부안레이더"
+    ],
+    [
+      "HLA",
+      "한라산",
+      "한라레이더"
+    ],
+    [
+      "KMP",
+      "김포레이더"
+    ],
+    [
+      "KOS",
+      "금오산",
+      "금오산레이더"
+    ],
+    [
+      "YMS",
+      "용문산",
+      "용문산레이더"
+    ],
+    [
+      "USM",
+      "USB",
+      "의상봉",
+      "의상봉레이더"
+    ],
+    [
+      "PYT",
+      "평택",
+      "평택레이더"
+    ],
+    [
+      "PYL",
+      "PYD",
+      "백령도",
+      "백령도레이더"
+    ],
+    [
+      "WSN",
+      "왕산",
+      "왕산레이더"
+    ],
+    [
+      "PGS",
+      "팔공산",
+      "팔공산레이더"
+    ],
+    [
+      "MSP",
+      "모슬포",
+      "무슬포"
+    ],
+    [
+      "SBD",
+      "신불도",
+      "신불도레이더"
+    ],
+    [
+      "MIS",
+      "망일산",
+      "망일산레이더"
+    ],
+    [
+      "DKG",
+      "동광",
+      "동광레이더"
+    ],
+    [
+      "CJI",
+      "인드라레이더",
+      "Indra"
+    ],
+    [
+      "LAM",
+      "수신확인응답",
+      "ack"
+    ],
+    [
+      "EST",
+      "Estimate",
+      "Estimate 메시지",
+      "EST 메시지"
+    ],
+    [
+      "CHG",
+      "Change",
+      "Change 메시지",
+      "CHG 메시지"
+    ],
+    [
+      "CNL",
+      "Cancel",
+      "Cancel 메시지",
+      "CNL 메시지"
+    ],
+    [
+      "ACP",
+      "Accept",
+      "Accept 메시지",
+      "ACP 메시지"
+    ],
+
+    ["DEP", "Departure", "DEP 메시지", "출발 메시지"],
+    ["ARR", "Arrival", "ARR 메시지", "도착 메시지"],
+    ["DLA", "Delay", "DLA 메시지", "지연 메시지"],
+
+    ["근무", "교대", "근무교대", "당직", "근무일지"],
+    ["인수인계", "인계", "인수", "교대 사항", "인계사항", "인계인수"],
+    ["브리핑", "Briefing", "사전브리핑", "근무브리핑"],
+    ["주간", "주간근무", "Day Shift", "일근무"],
+    ["야간", "야간근무", "Night Shift", "심야"],
+
+    ["이륙", "Takeoff", "Take Off", "이륙허가"],
+    ["착륙", "Landing", "착륙허가"],
+    ["순항", "Cruise", "En Route", "항로비행", "ENR"],
+    ["접근", "Approach", "Final Approach", "최종접근", "진입"],
+    ["선회", "Holding", "대기선회", "체공", "Hold"],
+    ["이륙중단", "Reject Takeoff", "RTO", "이륙 중단", "Abort"],
+
+    ["비행계획서변경", "FPL수정", "AFIL", "재작성", "비행계획수정"],
+    ["비행계획자동", "자동생성", "자동비행계획", "RPL생성"],
+    ["비행정보", "ATIS", "비행정보제공", "비행정보업무"],
+
+    ["기상", "Weather", "METAR", "기상정보", "기상 관측"],
+    ["시정", "Visibility", "가시거리", "시정장애", "RVR"],
+    ["풍향", "Wind", "바람", "풍속", "돌풍", "Gust"],
+    ["난류", "Turbulence", "터뷸런스", "흔들림"],
+    ["뇌우", "Thunderstorm", "CB", "적란운", "번개"],
+    ["안개", "Fog", "FG", "안개주의보"],
+    ["태풍", "Typhoon", "태풍경보"],
+
+    ["고도", "Altitude", "FL", "Flight Level", "비행고도"],
+    ["속도제어", "Speed Control", "Mach", "knot", "노트"],
+    ["상승", "Climb", "CLB", "상승비행", "ascending"],
+    ["강하", "Descent", "DES", "강하비행", "descending"],
+    ["고도유지", "Level Off", "레벨", "수평비행"],
+
+    ["주파수", "Frequency", "VHF", "주파수 변경"],
+    ["호출부호", "Callsign", "콜사인", "항공기부호"],
+    ["교신", "Radio", "무선교신", "무선통신", "통화"],
+    ["비상주파수", "Guard", "121.5"],
+
+    ["활주로", "Runway", "RWY", "활주로 점검"],
+    ["유도로", "Taxiway", "TWY"],
+    ["계류장", "Apron", "Ramp", "주기장"],
+    ["활주로 폐쇄", "Runway Closed", "활주로폐쇄"],
+
+    ["비상", "Emergency", "MAYDAY", "PAN PAN", "긴급상황"],
+    ["사고", "Accident", "항공기사고"],
+    ["준사고", "Incident", "항공기준사고", "안전사건"],
+    ["위험", "Hazard", "위험요소", "안전위험"],
+
+    ["소프트웨어", "SW", "Software", "프로그램"],
+    ["하드웨어", "HW", "Hardware", "장비교체"],
+    ["펌웨어", "Firmware", "FW"],
+    ["운영체제", "OS", "Operating System", "리눅스", "Linux", "Windows"],
+
+    ["비행검사", "Flight Check", "비행점검", "비행시험"],
+    ["시험비행", "Test Flight", "검증비행"],
+
+    ["분리", "Separation", "분리기준", "관제분리"],
+    ["최저분리", "Minimum Separation", "분리최소"],
+    ["수직분리", "Vertical Separation", "RVSM분리"],
+    ["수평분리", "Lateral Separation", "횡분리"],
+    ["레이더분리", "Radar Separation", "레이더관제"],
+
+    ["비행금지구역", "Prohibited Area", "P구역", "비행금지"],
+    ["비행제한구역", "Restricted Area", "R구역", "비행제한"],
+    ["위험구역", "Danger Area", "D구역"],
+    ["훈련구역", "Training Area", "훈련공역", "군사훈련구역"],
+
+    ["WAFC", "World Area Forecast Centre"],
+    ["SIGMET", "Significant Meteorological Information", "시그멧"],
+    ["AIRMET", "Airmen's Meteorological Information", "에어멧"],
+
+    ["관제허가", "Clearance", "CLR", "허가", "관제승인"],
+    ["관제지시", "Instruction", "지시", "관제사지시"],
+    ["관제권고", "Advisory", "조언", "정보제공"],
+
+    ["공역", "Airspace", "관제공역", "공역관리"],
+    ["비관제공역", "Uncontrolled Airspace", "G등급"],
+    ["관제구역", "Controlled Airspace", "CTA구역"],
+
+    ["항공기등록", "Registration", "등록부호"],
+    ["편명", "Flight Number", "편번호", "항공기편명"],
+    ["기종", "Aircraft Type", "항공기종류", "기체"],
+
+    ["헤비", "Heavy", "H기종", "대형기"],
+    ["미디엄", "Medium", "M기종", "중형기"],
+    ["슈퍼", "Super", "A380", "초대형기"],
+
+    ["DME", "Distance Measuring Equipment", "거리측정장비"],
+    ["NDB", "Non-Directional Beacon", "무지향성표지"],
+    ["ILS", "Instrument Landing System", "계기착륙장치", "계기착륙시스템"],
+    ["GNSS", "Global Navigation Satellite System", "위성항법", "GPS"],
+
+    ["전환", "Switching", "절체", "절환", "전환작업"],
+    ["이중화전환", "Failover전환", "자동절체", "자동전환"],
+    ["수동전환", "Manual Switching", "수동절체"],
+
+    ["디스플레이", "Display", "화면", "전시장치", "모니터"],
+    ["CRT", "Display Unit", "표시장치"],
+    ["현시", "전시", "Display 화면"],
+
+    ["프린터", "Printer", "출력장치", "인쇄"],
+    ["스트립프린터", "Strip Printer", "FSP출력"],
+
+    ["타워", "Tower", "관제탑", "TWR", "비행장관제"],
+    ["지상관제", "Ground Control", "GND", "지상이동관제"],
+    ["출발관제", "Departure Control", "출발관제석"],
+    ["접근관제석", "Approach Seat", "접근석"],
+
+    ["음성녹음", "Voice Recording", "음성기록", "녹취"],
+    ["레이더녹화", "Radar Recording", "레이더기록", "화면녹화"],
+    ["데이터녹화", "Data Recording", "자료기록", "데이터기록"],
+
+    ["무선설비", "Radio Equipment", "통신설비"],
+    ["안테나", "Antenna", "ANT", "안테나장비"],
+    ["UPS전원", "무정전전원", "무정전전원장치", "비상전원"],
+
+    ["IP주소", "IP Address", "IP", "네트워크주소"],
+    ["포트", "Port", "네트워크포트", "통신포트"],
+    ["방화벽", "Firewall", "보안장비"],
+
+    ["메모리", "Memory", "RAM", "메모리부족", "메모리 사용량"],
+    ["디스크", "Disk", "HDD", "SSD", "저장공간", "디스크공간"],
+    ["CPU", "프로세서", "Processor", "CPU사용률"],
+
+    ["타임아웃", "Timeout", "응답없음", "시간초과", "응답지연"],
+    ["접속불가", "Connection Failed", "연결실패", "접속장애"],
+    ["데이터누락", "Data Loss", "자료누락", "데이터유실"],
+
+    ["ETA", "Estimated Time of Arrival", "도착예정시각"],
+    ["예상출발시각", "Estimated Time of Departure", "EDCT"],
+    ["ATC Delay", "관제지연", "항공지연", "지연"],
+
+    ["조류충돌", "Bird Strike", "버드스트라이크", "조류"],
+    ["레이저", "Laser", "레이저조사", "레이저 사건"],
+
+    ["제한속도", "Speed Limit", "속도제한", "속도규제"],
+    ["대기항로", "Holding Pattern", "대기패턴"],
+
+    ["자료연계", "Data Link", "데이터연계", "자료교환"],
+    ["시스템연동", "System Integration", "연동오류", "연계오류"],
+
+    ["로그인", "Login", "접속", "로그인오류"],
+    ["권한", "Permission", "접근권한", "사용자권한"],
+    ["사용자계정", "Account", "계정", "계정관리"],
+
+    ["좌표", "Coordinate", "위경도", "위치정보"],
+    ["항로점", "Waypoint", "WPT", "경유지"],
+    ["고정점", "Fix", "FIX", "항로고정점"],
+
+    ["ADS-C", "ADS-Contract", "자동종속감시계약"],
+    ["MLAT", "Multilateration", "다변측정", "다변측위"],
+    ["WAM", "Wide Area Multilateration", "광역다변측정"],
+
+    ["SWIM", "System Wide Information Management", "항공정보관리"],
+    ["AMSS", "Aeronautical Mobile Satellite Service", "항공이동위성"],
+
+    ["정비", "Maintenance Check", "항공기정비"],
+    ["램프점검", "Ramp Check", "지상점검"],
+
+    ["허가전", "Pre-departure", "출발전", "출발 준비"],
+    ["이착륙", "Take-off and Landing", "이·착륙", "이착륙 현황"],
+
+    ["항공교통관제", "ATC", "관제업무", "항공교통관리", "ATM"],
+    ["관제기관", "ATC Unit", "관제기관 간", "기관 간"],
+
+    ["HF통신", "HF Communication", "단파통신", "HF"],
+    ["VHF통신", "VHF Communication", "초단파통신"],
+    ["SATCOM", "위성통신", "Satellite Communication"],
+
+    ["전자비행정보", "EFB", "Electronic Flight Bag"],
+    ["자동관제이양", "Auto Handoff", "자동이양", "자동이관"],
+    ["자동상관", "Auto Correlation", "자동항적상관"],
+
+    ["편서풍", "Jet Stream", "제트기류", "제트스트림"],
+    ["대류성", "Convective", "대류운", "적운"],
+    ["착빙", "Icing", "결빙", "착빙주의보"],
+
+    ["카드분류", "관제시스템 설치", "관제시스템 검증", "관제지원 개발", "시스템 장애", "행정 문서"],
+    ["주간근무", "주간", "Day Shift", "일근"],
+    ["야간근무", "야간", "Night Shift", "심야근무"],
+    ["주야근무", "주야", "주야간", "Day Night"],
+    ["비번", "Day Off", "휴무"],
+    ["휴가", "연차", "대체휴가", "대휴", "Leave"],
+
+    ["COF", "Control Of Flight", "COF모듈", "조정기능모듈"],
+    ["JP", "JP표시", "JP마크", "관제이양표시자"],
+    ["OD", "OD표시", "OD마크", "항적삭제표시"],
+
+    ["시스템장애", "장애처리", "이상처리", "Fault Handling"],
+    ["행정", "문서관리", "행정업무", "Administration"],
+
+    ["EDST", "En Route Decision Support Tool"],
+    ["ERAM", "En Route Automation Modernization"],
+    ["SWIM연계", "SWIM Interface", "SWIM 연동"]
+  ]
+}

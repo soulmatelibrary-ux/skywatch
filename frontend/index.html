@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skywatch — 시스템정보부 관제·인계 일지</title>
+    <link rel="stylesheet" href="/fonts/pretendard.css" />
+    <!-- 다크모드 깜빡임 방지: React 렌더 전에 테마 클래스 적용 -->
+    <script>
+      (function () {
+        var t = localStorage.getItem('skywatch-theme');
+        if (t === 'dark') document.documentElement.classList.add('dark');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
